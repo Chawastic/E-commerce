@@ -1,0 +1,79 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<!-- redirect to product page based on selected brand -->
+<script>
+document.getElementById('brandSelect').addEventListener('change', function() {
+    window.location.href = `/admin/products?brand=${this.value}`;
+});
+//script to redirect to product page based on selected category
+document.getElementById('categorySelect').addEventListener('change', function() {
+    window.location.href = `/admin/products?category=${this.value}`;
+});
+</script>
+
+<!-- handles displaying edit product modal -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.editProductBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-productid');
+            const productName = this.getAttribute('data-productname');
+            const productBrandId = this.getAttribute('data-productbrand');
+            const productCategoryId = this.getAttribute('data-productcategory');
+            const productDescription = this.getAttribute('data-productdescription');
+            const productQuantity = this.getAttribute('data-productquantity');
+            const productPrice = this.getAttribute('data-productprice');
+            const productActive = this.getAttribute('data-productactive') === 'true';
+            
+            document.getElementById('productId').value = productId;
+            document.getElementById('productName').value = productName;
+            document.getElementById('productBrand').value = productBrandId;
+            document.getElementById('productCategory').value = productCategoryId;
+            document.getElementById('productDescription').value = productDescription;
+            document.getElementById('productQuantity').value = productQuantity;
+            document.getElementById('productPrice').value = productPrice;
+            document.getElementById('productActive').value = productActive.toString();
+            
+            $('#editProductModal').modal('show');
+        });
+    });
+});
+</script>
+
+<!-- save changes to a product using route post endpoint /admin/products/update -->
+<script>
+document.getElementById('saveProductChanges').addEventListener('click', function() {
+    const productId = document.getElementById('productId').value;
+    const productName = document.getElementById('productName').value;
+    const productBrandId = document.getElementById('productBrand').value;
+    const productCategoryId = document.getElementById('productCategory').value;
+    const productDescription = document.getElementById('productDescription').value;
+    const productQuantity = document.getElementById('productQuantity').value;
+    const productPrice = document.getElementById('productPrice').value;
+    const productActive = document.getElementById('productActive').value === 'true';
+
+    fetch('/admin/products/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            id: productId, 
+            name: productName, 
+            brandId: productBrandId, 
+            categoryId: productCategoryId,
+            description: productDescription,
+            stockQuantity: productQuantity,
+            price: productPrice,
+            isActive: productActive
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        $('#editProductModal').modal('hide');
+        location.reload();
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>

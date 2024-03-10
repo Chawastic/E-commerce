@@ -1,0 +1,26 @@
+<div class="container" style="margin-top: 100px;">
+    <h1>Products</h1>
+    <!--search form brand product page -->
+    <select class="form-select" id="brandSelect">
+        <option value="">Select a Brand</option>
+        <% brands.forEach(function(brand) { %>
+            <option value="<%= brand.id %>" <%= brand.id == selectedBrand ? 'selected' : '' %>><%= brand.name %></option>
+        <% }); %>
+    </select>
+<!--search form category product page -->
+    <select class="form-select" id="categorySelect">
+        <option value="">Select a Category</option>
+        <% categories.forEach(function(category) { %>
+            <option value="<%= category.id %>" <%= category.id == selectedCategory ? 'selected' : '' %>><%= category.name %></option>
+        <% }); %>
+    </select>
+<!--gets searched products using route endpoint in /admin/products -->
+    <form action="/admin/products" method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Search products by name" aria-label="Search products by name" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+        </div>
+    </form>
+
+    <a href="/admin/products" class="btn btn-outline-primary ml-2">Clear</a>
+</div>

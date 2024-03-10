@@ -1,0 +1,40 @@
+<header id="home">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center mb-4">
+                    <h1 class="mt-5">E-commerce</h1>
+                </div>
+                <% if (!user) { %>
+                <section class="login" id="login">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h2 class="card-title text-center">Sign in</h2>
+                            <form action="/admin/loginLogout/login" method="post" style="max-width: 400px; margin: auto;">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input id="username" name="username" type="text" autocomplete="username" class="form-control" required autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label for="current-password">Password</label>
+                                    <input id="current-password" name="password" type="password" autocomplete="current-password" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                <% } else { %>
+                <section class="logout text-center">
+                    <h2>Welcome, <%= user.username %>!</h2>
+                    <form action="/admin/loginLogout/logout" method="get">
+                        <button class="btn btn-danger" type="submit">Logout</button>
+                    </form>
+                </section>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</header>

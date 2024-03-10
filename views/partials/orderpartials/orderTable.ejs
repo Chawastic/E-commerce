@@ -1,0 +1,29 @@
+<div class="container" style="margin-top: 100px;">
+    <h1>Orders</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Status</th>
+                <th>Order Date</th>
+                <th>Order number</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(function(order) { %>
+                <tr>
+                    <td><%= order.id %></td>
+                    <td><%= order.UserId %></td>
+                    <td><%= order.status %></td>
+                    <td><%= order.createdAt.toDateString() %></td>
+                    <td>random generated string</td>
+                    <td><button class="btn btn-warning editOrderBtn" 
+                        data-orderId="<%= order.id %>" 
+                        data-orderStatus="<%= order.status %>">Edit</button></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

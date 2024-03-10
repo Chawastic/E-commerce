@@ -1,0 +1,41 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+<!-- lets you edit order statuses -->
+<script>
+    $(document).ready(function() {
+        $('.editOrderBtn').click(function() {
+            var orderId = $(this).data('orderid');
+            var orderStatus = $(this).data('orderstatus');
+            
+            $('#editOrderId').val(orderId);
+            $('#editOrderStatus').val(orderStatus);
+            
+            $('#editOrderModal').modal('show');
+        });
+    
+        $('#saveOrderChanges').click(function() {
+            var orderId = $('#editOrderId').val();
+            var orderStatus = $('#editOrderStatus').val();
+            //post to databse using route endpoint
+            fetch('/admin/orders/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: orderId,
+                    status: orderStatus
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                $('#editOrderModal').modal('hide');
+                location.reload();
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+</script>

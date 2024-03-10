@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <% if (products && products.length > 0) { %>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Stock Quantity</th>
+                    <th>Price</th>
+                    <th>Brand</th>
+                    <th>Category</th>
+                    <th>Is Active?</th>
+                    <th>Created At</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(function(product) { %>
+                    <tr>
+                        <td><%= product.id %></td>
+                        <td><%= product.name %></td>
+                        <td><%= product.description %></td>
+                        <td><%= product.stockQuantity %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.Brand ? product.Brand.name : 'N/A' %></td>
+                        <td><%= product.Category ? product.Category.name : 'N/A' %></td>
+                        <td><%= product.isActive ? 'Yes' : 'No' %></td>
+                        <td><%= product.createdAt.toDateString() %></td>
+                        <td><button type="button" class="btn btn-warning editProductBtn" 
+                            data-productid="<%= product.id %>" 
+                            data-productname="<%= product.name %>"
+                            data-productbrand="<%= product.Brand.id %>"
+                            data-productcategory="<%= product.Category.id %>"
+                            data-productdescription="<%= product.description %>"
+                            data-productquantity="<%= product.stockQuantity %>"
+                            data-productprice="<%= product.price %>"
+                            data-productactive="<%= product.isActive %>">Edit</button></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p><%= message %></p>
+    <% } %>
+    </div>
+    

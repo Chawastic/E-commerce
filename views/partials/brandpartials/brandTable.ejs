@@ -1,0 +1,28 @@
+<div class="container" style="margin-top: 100px;">
+    <h1>Brands</h1>
+    <button class="btn btn-success btn-lg" id="addBrandBtn">Add New</button>
+    <!-- brands table where all info is rendered -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% brands.forEach(function(brand) { %>
+                <tr>
+                    <td><%= brand.id %></td>
+                    <td><%= brand.name %></td>
+                    <td>
+                        <button class="btn btn-warning btn-sm editBrandBtn" 
+                            data-brandId="<%= brand.id %>" 
+                            data-brandName="<%= brand.name %>">Edit</button>
+                        <button class="btn btn-danger btn-sm deleteBrandBtn" data-brandId="<%= brand.id %>">Delete</button>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

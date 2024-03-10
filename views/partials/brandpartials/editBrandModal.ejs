@@ -1,0 +1,22 @@
+<!-- modal used for editing brands -->
+<div class="modal fade" id="editBrandModal" tabindex="-1" role="dialog" aria-labelledby="editBrandModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBrandModalLabel">Edit Brand</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editBrandForm">
+                    <input type="hidden" id="editBrandId">
+                    <div class="form-group">
+                        <label for="editBrandName">Brand Name:</label>
+                        <input type="text" class="form-control" id="editBrandName" name="name" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="updateBrand">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

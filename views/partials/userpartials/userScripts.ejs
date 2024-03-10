@@ -1,0 +1,51 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('.editUserBtn').click(function() {
+        $('#editUserId').val($(this).data('userid'));
+        $('#editUserFirstname').val($(this).data('userfirstname'));
+        $('#editUserLastname').val($(this).data('userlastname'));
+        $('#editUserEmail').val($(this).data('useremail'));
+        $('#editUserRole').val($(this).data('userroleid'));
+        $('#editUserModal').modal('show');
+    });
+});
+</script>
+
+<!-- saves changes to users using route post endpoint admin/users/update-->
+<script>
+document.getElementById('saveUserChanges').addEventListener('click', function() {
+    const userId = $('#editUserId').val();
+    const firstname = $('#editUserFirstname').val();
+    const lastname = $('#editUserLastname').val();
+    const email = $('#editUserEmail').val();
+    const roleId = $('#editUserRole').val();
+
+    fetch('/admin/users/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: userId,
+            firstname,
+            lastname,
+            email,
+            roleId
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        $('#editUserModal').modal('hide');
+        if (data.success) {
+            location.reload();
+        } else {
+            alert('Error updating user: ' + data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>

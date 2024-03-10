@@ -1,0 +1,59 @@
+<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="form-group">
+                      <label for="productId">ID:</label>
+                      <input type="text" class="form-control" id="productId" readonly>
+                  </div>
+                  <div class="form-group">
+                      <label for="productName">Name:</label>
+                      <input type="text" class="form-control" id="productName">
+                  </div>
+                  <div class="form-group">
+                      <label for="productBrand">Brand:</label>
+                      <select class="form-control" id="productBrand">
+                          <% brands.forEach(function(brand) { %>
+                          <option value="<%= brand.id %>"><%= brand.name %></option>
+                          <% }); %>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="productCategory">Category:</label>
+                      <select class="form-control" id="productCategory">
+                          <% categories.forEach(function(category) { %>
+                          <option value="<%= category.id %>"><%= category.name %></option>
+                          <% }); %>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="productDescription">Description:</label>
+                      <textarea class="form-control" id="productDescription"></textarea>
+                  </div>
+                  <div class="form-group">
+                      <label for="productQuantity">Quantity:</label>
+                      <input type="number" class="form-control" id="productQuantity">
+                  </div>
+                  <div class="form-group">
+                      <label for="productPrice">Price:</label>
+                      <input type="number" class="form-control" id="productPrice">
+                  </div>
+                  <div class="form-group">
+                      <label for="productActive">Active Status:</label>
+                      <select class="form-control" id="productActive">
+                          <option value="true">Active</option>
+                          <option value="false">Inactive</option>
+                      </select>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button id="saveProductChanges" type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
+          </div>
+      </div>
+  </div>
+</div>
